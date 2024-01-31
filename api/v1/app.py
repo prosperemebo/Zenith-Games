@@ -13,6 +13,11 @@ app.register_blueprint(app_views)
 # cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 # cors = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 
+cors = CORS(
+    app,
+    resources={r"/*": {"origins": "0.0.0.0"}}
+)
+
 load_dotenv()
 
 @app.teardown_appcontext
@@ -40,4 +45,4 @@ if __name__ == "__main__":
         host = "0.0.0.0"
     if not port:
         port = "5000"
-    app.run(host=host, port=port, threaded=True)
+    app.run(host=host, port=port, threaded=True, debug=True)

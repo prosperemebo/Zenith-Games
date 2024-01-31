@@ -5,10 +5,7 @@ from models.base_model import BaseModel, Base
 from os import getenv
 import sqlalchemy
 from sqlalchemy import Column, String, ForeignKey, Table, Integer, Enum
-from sqlalchemy.orm import relationship, declarative_base
-
-
-Base = declarative_base()
+from sqlalchemy.orm import relationship
 
 product_category_association = Table(
     "product_category_association",
@@ -51,10 +48,17 @@ class Product(BaseModel, Base):
     status = Column(
         Enum("out_of_stock", "draft", "publish", "deleted"), default="publish"
     )
+    # categories = Column(String(60), nullable=False, default='')
     categories = relationship(
-        "Category", secondary=product_category_association, back_populates="products"
+        "Category", secondary=product_category_association, backref="categories"
     )
 
     def __init__(self, *args, **kwargs):
         """Initialize Product"""
         super().__init__(*args, **kwargs)
+        
+    @property
+    def categories(self):
+        """getter attribute returns the list of Category instances"""
+        category_ids = self.categories.split(',')
+        return category_ids
