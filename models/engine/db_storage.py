@@ -8,32 +8,36 @@ from models.base_model import BaseModel, Base
 from models.category import Category
 from models.product import Product
 from os import getenv
+from dotenv import load_dotenv
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-classes = { "Category": Category, "Product": Product }
+classes = {"Category": Category, "Product": Product}
+
+load_dotenv()
 
 
 class DBStorage:
     """interaacts with the MySQL database"""
+
     __engine = None
     __session = None
 
     def __init__(self):
         """Instantiate a DBStorage object"""
-        MYSQL_USER = getenv('MYSQL_USER')
-        MYSQL_PWD = getenv('MYSQL_PWD')
-        MYSQL_HOST = getenv('MYSQL_HOST')
-        MYSQL_DB = getenv('MYSQL_DB')
-        ENV = getenv('ENV')
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-                                      format(MYSQL_USER,
-                                             MYSQL_PWD,
-                                             MYSQL_HOST,
-                                             MYSQL_DB))
-        if ENV == "test":
-            Base.metadata.drop_all(self.__engine)
+        MYSQL_USER = getenv("MYSQL_USER")
+        MYSQL_PWD = getenv("MYSQL_PWD")
+        MYSQL_HOST = getenv("MYSQL_HOST")
+        MYSQL_DB = getenv("MYSQL_DB")
+        ENV = getenv("ENV")
+        self.__engine = create_engine(
+            "mysql+mysqldb://{}:{}@{}/{}".format(
+                MYSQL_USER, MYSQL_PWD, MYSQL_HOST, MYSQL_DB
+            )
+        )
+        # if ENV == "test":
+        #     Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """query on the current database session"""
@@ -42,9 +46,9 @@ class DBStorage:
             if cls is None or cls is classes[clss] or cls is clss:
                 objs = self.__session.query(classes[clss]).all()
                 for obj in objs:
-                    key = obj.__class__.__name__ + '.' + obj.id
+                    key = obj.__class__.__name__ + "." + obj.id
                     new_dict[key] = obj
-        return (new_dict)
+        return new_dict
 
     def new(self, obj):
         """add the object to the current database session"""
@@ -80,7 +84,7 @@ class DBStorage:
 
         all_cls = models.storage.all(cls)
         for value in all_cls.values():
-            if (value.id == id):
+            if value.id == id:
                 return value
 
         return None

@@ -6,7 +6,7 @@ from os import getenv
 import sqlalchemy
 from sqlalchemy import Column, String, ForeignKey, Enum
 from sqlalchemy.orm import relationship
-from product import product_category_association
+from models.product import product_category_association
 
 class Category(BaseModel, Base):
     """ Representation of Category """
