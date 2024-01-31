@@ -30,8 +30,7 @@ class Product(BaseModel, Base):
     images = Column(String(1024), nullable=True)
     price = Column(Integer, nullable=False, default=0)
     source_id = Column(String(60), nullable=False)
-    status = Column(Enum('available', 'out_of_stock', 'discontinued',
-                    'draft', 'publish', 'deleted'), default='deleted')
+    status = Column(Enum('out_of_stock', 'draft', 'publish', 'deleted'), default='publish')
     categories = relationship(
         'Category', secondary=product_category_association, back_populates='products')
 
