@@ -6,20 +6,19 @@ from os import getenv
 import sqlalchemy
 from sqlalchemy import Column, String, ForeignKey, Enum
 from sqlalchemy.orm import relationship
-from models.product import product_category_association
 
 class Category(BaseModel, Base):
     """ Representation of Category """
 
     __tablename__ = 'categories'
     label = Column(String(1024), nullable=False)
-    slug = Column(String(1024), nullable=False)
+    slug = Column(String(60), nullable=False, unique=True)
     summary = Column(String(1024), nullable=False, default='')
     parent_id = Column(String(60), ForeignKey('categories.id'), nullable=True)
-    source_id = Column(String(60), nullable=False)
-    status = Column(Enum('draft', 'publish', 'deleted'), default='deleted')
+    source_id = Column(String(60), nullable=False, unique=True)
+    status = Column(Enum('draft', 'publish', 'deleted'), default='publish')
     products = relationship(
-        "Product", secondary=product_category_association, backref="categories"
+        "Product", backref="categories"
     )
 
 

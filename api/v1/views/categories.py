@@ -10,7 +10,10 @@ from slugify import slugify
 @app_views.route('/categories', methods=['GET'], strict_slashes=False)
 def get_categories():
     """ Retrieves the list of all Categories """
-    categories = storage.all(Category).values()
+    valid_filters = ['parent_id', 'source_id', 'status', 'slug']
+    
+    filters = {key: request.args.get(key) for key in valid_filters if key in request.args}
+    categories = storage.all(Category, **filters).values()
     categories_list = []
 
     for category in categories:
@@ -78,13 +81,13 @@ def put_category(category_id):
 
 @app_views.route('/categories/<category_id>', methods=['DELETE'], strict_slashes=False)
 def delete_category(category_id):
-    """ Deletes category"""
-    category = storage.get(Category, category_id)
+    """ Deletes product"""
+    product = storage.get(Category, category_id)
 
-    if not category:
+    if not product:
         abort(404)
 
-    storage.delete(category)
+    storage.delete(product)
     storage.save()
 
     return make_response(jsonify({}), 200)

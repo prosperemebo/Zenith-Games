@@ -39,12 +39,18 @@ class DBStorage:
         # if ENV == "test":
         #     Base.metadata.drop_all(self.__engine)
 
-    def all(self, cls=None):
+    def all(self, cls=None, **kwargs):
         """query on the current database session"""
         new_dict = {}
         for clss in classes:
             if cls is None or cls is classes[clss] or cls is clss:
-                objs = self.__session.query(classes[clss]).all()
+                query = self.__session.query(classes[clss])
+                
+                if kwargs:
+                    query = query.filter_by(**kwargs)
+            
+                objs = query.all()
+
                 for obj in objs:
                     key = obj.__class__.__name__ + "." + obj.id
                     new_dict[key] = obj

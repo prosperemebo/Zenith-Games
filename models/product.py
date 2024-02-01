@@ -7,32 +7,6 @@ import sqlalchemy
 from sqlalchemy import Column, String, ForeignKey, Table, Integer, Enum
 from sqlalchemy.orm import relationship
 
-product_category_association = Table(
-    "product_category_association",
-    Base.metadata,
-    Column(
-        "product_id",
-        String(60),
-        ForeignKey(
-            "products.id",
-            onupdate="CASCADE",
-            ondelete="CASCADE",
-        ),
-        primary_key=True,
-    ),
-    Column(
-        "category_id",
-        String(60),
-        ForeignKey(
-            "categories.id",
-            onupdate="CASCADE",
-            ondelete="CASCADE",
-        ),
-        primary_key=True,
-    ),
-)
-
-
 class Product(BaseModel, Base):
     """Representation of Product"""
 
@@ -48,10 +22,7 @@ class Product(BaseModel, Base):
     status = Column(
         Enum("out_of_stock", "draft", "publish", "deleted"), default="publish"
     )
-    # categories = Column(String(60), nullable=False, default='')
-    categories = relationship(
-        "Category", secondary=product_category_association, backref="categories"
-    )
+    categories = Column(String(60), nullable=False, default='')
 
     def __init__(self, *args, **kwargs):
         """Initialize Product"""
