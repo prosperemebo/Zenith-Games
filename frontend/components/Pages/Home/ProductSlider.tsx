@@ -6,16 +6,10 @@ import { EffectCoverflow, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import './style.scss';
 import Image from 'next/image';
-
-interface Product {
-  id: string;
-  label: string;
-  cover_image: string;
-  // Add other properties as needed
-}
+import { IProduct } from '@/utils/interfaces';
 
 const ProductSlider = (): JSX.Element => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -77,7 +71,7 @@ const ProductSlider = (): JSX.Element => {
             draggable='false'
             src={product.cover_image?.split('?')[0]}
             alt={product.label}
-	    priority={index === 1}
+            priority={index === 1}
           />
           <h1
             className='heading-primary'

@@ -5,13 +5,9 @@ import Image from 'next/image';
 import { IoSearch } from 'react-icons/io5';
 
 import logo from '../../assets/images/logo.png';
+import { ICategory } from '@/utils/interfaces';
 
-interface Category {
-  id: string;
-  label: string;
-}
-
-async function fetchCategories(): Promise<Category[]> {
+async function fetchCategories(): Promise<ICategory[]> {
   const response = await fetch(
     `${process.env.SERVER_URL}/api/v1/categories/parent`
   );

@@ -20,20 +20,20 @@ body {
     }
   }
 
-  @include respond(tab-land) {
-    font-size: 8rem;
-  }
+  // @include respond(tab-land) {
+  //   font-size: 8rem;
+  // }
 
-  @include respond(phone) {
-    line-height: 120%;
-    margin-bottom: 1.5rem;
-  }
+  // @include respond(phone) {
+  //   line-height: 120%;
+  //   margin-bottom: 1.5rem;
+  // }
 
-  @include respond(phone-sm) {
-    font-size: 5rem;
-    line-height: 120%;
-    margin-bottom: 1.5rem;
-  }
+  // @include respond(phone-sm) {
+  //   font-size: 5rem;
+  //   line-height: 120%;
+  //   margin-bottom: 1.5rem;
+  // }
 }
 
 .gradient-text {

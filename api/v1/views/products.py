@@ -12,9 +12,14 @@ from slugify import slugify
 @app_views.route('/products', methods=['GET'], strict_slashes=False)
 def get_products():
     """
-    Retrieves the list of all Products
+    Retrieves the list of all Products with pagination
     """
-    products = storage.all(Product).values()
+    page = request.args.get('page', default=1, type=int)
+    per_page = request.args.get('per_page', default=100, type=int)
+
+    offset = (page - 1) * per_page
+
+    products = storage.all(Product).values().offset(offset).limit(per_page)
     products_list = []
 
     for product in products:

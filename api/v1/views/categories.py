@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ objects that handle all default RestFul API actions for Categories """
+from models.product import Product
 from models.category import Category
 from models import storage
 from api.v1.views import app_views
@@ -50,6 +51,34 @@ def get_category(category_id):
         abort(404)
 
     return jsonify(category.to_dict())
+
+
+@app_views.route('/categories/<category_id>/products', methods=['GET'], strict_slashes=False)
+def get_category_product(category_id):
+    """ Retrieves a specific Category Products """
+    category = storage.get(Category, category_id)
+
+    if not category:
+        abort(404)
+
+    category_dict = category.to_dict()        
+    products = storage.all(Product).values()
+    products_list = []
+
+    count = 0
+    for product in products:
+        prod_dict = product.to_dict()
+
+        if category_dict.get('id') in prod_dict.get('categories'):
+            products_list.append(prod_dict)
+            count += 1
+
+        if count >= 10:
+            break
+
+    category_dict['products'] = products_list
+
+    return jsonify(category_dict)
 
 
 @app_views.route('/categories', methods=['POST'], strict_slashes=False)
