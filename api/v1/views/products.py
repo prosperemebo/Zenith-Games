@@ -96,12 +96,12 @@ def delete_product(product_id):
 @app_views.route('/products/recommended', methods=['GET'], strict_slashes=False)
 def get_random_products():
     """ Retrieves 10 random products for the home page """
-    products = storage.all(Product).values()
+    products = list(storage.all(Product).values())
 
-    if len(products) <= 10:
+    if len(products) <= 20:
         random_products = [product.to_dict() for product in products]
     else:
-        random_products = random.sample(products, 10)
+        random_products = random.sample(products, 20)
         random_products = [product.to_dict() for product in random_products]
 
     return jsonify(random_products)

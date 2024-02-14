@@ -13,12 +13,15 @@ app.register_blueprint(app_views)
 # cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 # cors = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 
-cors = CORS(
-    app,
-    resources={r"/*": {"origins": "0.0.0.0"}}
-)
+
+allowed_origins = [
+    "http://localhost:3000",
+]
+
+cors = CORS(app, resources={r"/*": {"origins": allowed_origins}})
 
 load_dotenv()
+
 
 @app.teardown_appcontext
 def close_db(error):

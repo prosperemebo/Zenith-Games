@@ -1,0 +1,37 @@
+.swiper {
+  width: 100%;
+  height: 70rem;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 80rem;
+
+  h1 {
+    opacity: 0;
+    text-align: center;
+    transition: opacity 300ms ease;
+  }
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 70%;
+  object-fit: contain;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+}
+
+.swiper-slide-active {
+  h1 {
+    opacity: 1;
+  }
+}
+
+.swiper-slide-active {
+  h1 {
+    opacity: 1;
+  }
+}

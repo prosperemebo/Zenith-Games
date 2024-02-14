@@ -1,11 +1,47 @@
 @import '../../src/sass/abstracts/variables';
 
 .navigation {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6rem 7vw;
+  padding: 4rem 7vw;
   position: relative;
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+
+  .menu {
+    background-color: #1b1924;
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    border-radius: 12px;
+    overflow: hidden;
+
+    li {
+      min-width: 15rem;
+      flex-grow: 1;
+      flex-shrink: 0;
+      white-space: nowrap;
+      list-style: none;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 500;
+      padding: 1rem;
+      cursor: pointer;
+      transition: background-color 200ms ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      
+      a {
+        color: currentColor;
+        text-decoration: none;
+      }
+    }
+  }
 
   .logo {
     width: 12rem;
@@ -40,13 +76,13 @@
     }
 
     button {
-	border: none;
-	background-color: transparent;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: $color-primary;
-	font-size: 2rem;
+      border: none;
+      background-color: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $color-primary;
+      font-size: 2rem;
     }
   }
 }
