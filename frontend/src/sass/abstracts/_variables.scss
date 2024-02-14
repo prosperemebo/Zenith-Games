@@ -1,0 +1,39 @@
+// :root {
+//   --toastify-font-family: 'Inter', sans-serif;
+// }
+
+$color-primary: #ffebd8;
+$color-secondary: #050405;
+$color-dark: #121211;
+
+$color-white: #ffffff;
+
+$color-yellow: #fdd140;
+$color-orange: #fd6322;
+$color-orange-2: #e04300;
+
+$text-color-1: #ffebd8;
+$text-color-2: #473b21;
+$text-color-3: #A29C8A;
+
+$color-background: $color-secondary;
+
+$color-error: #e37872;
+$color-success: #9cf16c;
+
+$border-primary: 2px solid $text-color-3;
+
+$linear-gradient-1: linear-gradient(
+  -45deg,
+  rgba(253, 99, 34, 1),
+  rgba(253, 209, 64, 1)
+);
+
+//FONT-SIZE
+$default-font-size: 2.5rem;
+
+.Toastify__toast-body {
+  border-radius: 0px;
+  font-size: 1.4rem;
+  color: $color-secondary;
+}

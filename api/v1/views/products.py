@@ -1,3 +1,5 @@
+import random
+
 #!/usr/bin/python3
 """ objects that handle all default RestFul API actions for Products """
 from models.product import Product
@@ -90,3 +92,16 @@ def delete_product(product_id):
     storage.save()
 
     return make_response(jsonify({}), 200)
+
+@app_views.route('/products/recommended', methods=['GET'], strict_slashes=False)
+def get_random_products():
+    """ Retrieves 10 random products for the home page """
+    products = storage.all(Product).values()
+
+    if len(products) <= 10:
+        random_products = [product.to_dict() for product in products]
+    else:
+        random_products = random.sample(products, 10)
+        random_products = [product.to_dict() for product in random_products]
+
+    return jsonify(random_products)
