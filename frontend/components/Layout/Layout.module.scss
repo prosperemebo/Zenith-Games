@@ -1,0 +1,52 @@
+@import '../../src/sass/abstracts/variables';
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem 7vw;
+  position: relative;
+
+  .logo {
+    width: 12rem;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .inputWrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $color-grey-1;
+    padding: 1.2rem 2rem;
+    width: min(70rem, 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px;
+
+    // TODO: ENABLE SEARCH FUNCTIONALITY
+    pointer-events: none;
+
+    input {
+      background-color: transparent;
+      color: #b2b2b2;
+      border: none;
+      font-size: 1.8rem;
+      flex: 1;
+    }
+
+    button {
+	border: none;
+	background-color: transparent;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: $color-primary;
+	font-size: 2rem;
+    }
+  }
+}
