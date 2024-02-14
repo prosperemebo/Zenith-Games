@@ -45,10 +45,10 @@ class DBStorage:
         for clss in classes:
             if cls is None or cls is classes[clss] or cls is clss:
                 query = self.__session.query(classes[clss])
-                
+
                 if kwargs:
                     query = query.filter_by(**kwargs)
-            
+
                 objs = query.all()
 
                 for obj in objs:
@@ -92,6 +92,36 @@ class DBStorage:
         for value in all_cls.values():
             if value.id == id:
                 return value
+
+        return None
+
+    def get_by_field(self, cls, field_str, value):
+        """
+        Returns the object based on the class name and the field value, or
+        None if not found
+        """
+        if cls not in classes.values():
+            return None
+
+        all_objects = models.storage.all(cls)
+        fields = field_str.split(" ")
+
+        for obj in all_objects.values():
+            match = False
+
+            for field in fields:
+                if not hasattr(obj, field):
+                    match = False
+                    break
+
+                field_value = getattr(obj, field)
+
+                if field_value == value:
+                    match = True
+                    break
+
+            if match:
+                return obj
 
         return None
 

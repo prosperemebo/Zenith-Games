@@ -56,14 +56,21 @@ def get_category(category_id):
 @app_views.route('/categories/<category_id>/products', methods=['GET'], strict_slashes=False)
 def get_category_product(category_id):
     """ Retrieves a specific Category Products """
-    category = storage.get(Category, category_id)
+    
+    category = storage.get_by_field(Category, 'id slug', category_id)
+    per_page = request.args.get('per_page', default=10, type=int)
 
+    
     if not category:
         abort(404)
 
     category_dict = category.to_dict()        
     products = storage.all(Product).values()
     products_list = []
+    sub_categories_list = []
+    
+    filters = { 'parent_id': category_dict.get('id') }
+    sub_categories = storage.all(Category, **filters).values()
 
     count = 0
     for product in products:
@@ -73,10 +80,14 @@ def get_category_product(category_id):
             products_list.append(prod_dict)
             count += 1
 
-        if count >= 10:
+        if count >= per_page:
             break
+        
+    for sub_category in sub_categories:
+        sub_categories_list.append(sub_category.to_dict())
 
     category_dict['products'] = products_list
+    category_dict['sub_categories'] = sub_categories_list
 
     return jsonify(category_dict)
 

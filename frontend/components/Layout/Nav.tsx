@@ -9,7 +9,8 @@ import { ICategory } from '@/utils/interfaces';
 
 async function fetchCategories(): Promise<ICategory[]> {
   const response = await fetch(
-    `${process.env.SERVER_URL}/api/v1/categories/parent`
+    `${process.env.SERVER_URL}/api/v1/categories/parent`,
+    { cache: 'no-store' }
   );
   return response.json();
 }
@@ -34,7 +35,7 @@ async function Nav() {
           </button>
         </form>
         <div className={classes.actions}>
-          <Link href='/contact' legacyBehavior>
+          <Link href='/' legacyBehavior>
             <a className='btn btn-primary'>
               <span>Login</span>
             </a>
@@ -44,7 +45,7 @@ async function Nav() {
       <ul className={classes.menu}>
         {categories?.map((category) => (
           <li key={category.id}>
-            <Link href='/' legacyBehavior>
+            <Link href={`/categories/${category.slug}`} legacyBehavior>
               <a dangerouslySetInnerHTML={{ __html: category.label }}></a>
             </Link>
           </li>

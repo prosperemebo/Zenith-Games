@@ -17,7 +17,8 @@ const ProductCategory = ({ category }: Props) => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          `${process.env.SERVER_URL}/api/v1/categories/${category.id}/products`
+          `${process.env.SERVER_URL}/api/v1/categories/${category.id}/products`,
+          { cache: 'no-store' }
         );
 
         if (!response.ok) {
