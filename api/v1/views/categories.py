@@ -22,6 +22,25 @@ def get_categories():
     return jsonify(categories_list)
 
 
+@app_views.route('/categories/parent', methods=['GET'], strict_slashes=False)
+def get_parent_categories():
+    """ Retrieves the list of all Parent Categories """
+    valid_filters = ['parent_id', 'source_id', 'status', 'slug']
+    
+    filters = { key: request.args.get(key) for key in valid_filters if key in request.args }
+    
+    if 'parent_id' not in filters:
+        filters['parent_id'] = None
+    
+    categories = storage.all(Category, **filters).values()
+    categories_list = []
+
+    for category in categories:
+        categories_list.append(category.to_dict())
+
+    return jsonify(categories_list)
+
+
 @app_views.route('/categories/<category_id>', methods=['GET'], strict_slashes=False)
 def get_category(category_id):
     """ Retrieves a specific Category """
