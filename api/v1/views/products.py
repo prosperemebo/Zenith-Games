@@ -17,9 +17,7 @@ def get_products():
     page = request.args.get('page', default=1, type=int)
     per_page = request.args.get('per_page', default=100, type=int)
 
-    offset = (page - 1) * per_page
-
-    products = storage.all(Product).values().offset(offset).limit(per_page)
+    products = storage.all(Product, page=page, per_page=per_page).values()
     products_list = []
 
     for product in products:
@@ -31,7 +29,7 @@ def get_products():
 @app_views.route('/products/<product_id>', methods=['GET'], strict_slashes=False)
 def get_product(product_id):
     """ Retrieves a specific Product """
-    product = storage.get(Product, product_id)
+    product = storage.get_by_field(Product, 'id slug', product_id)
 
     if not product:
         abort(404)
@@ -123,3 +121,14 @@ def search_products():
         products_list.append(product.to_dict())
 
     return jsonify(products_list)
+
+@app_views.route('/products/count', methods=['GET'], strict_slashes=False)
+def get_products_count():
+    """ Search products """
+    products = storage.all(Product, per_page=5000).values()
+    products_list = []
+
+    for product in products:
+        products_list.append(product.to_dict())
+
+    return jsonify({'count': len(products_list)})

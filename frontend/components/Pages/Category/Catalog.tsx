@@ -25,7 +25,10 @@ const Catalog = ({ category }: Props) => {
           ))}
         </ul>
       )}
-      <p className="paragraph" dangerouslySetInnerHTML={{__html: category.summary}}></p>
+      <p
+        className='paragraph'
+        dangerouslySetInnerHTML={{ __html: category.summary }}
+      ></p>
       <ul className={classes.products}>
         {category.products.map((product, index) => (
           <li key={product.id}>
@@ -41,6 +44,7 @@ const Catalog = ({ category }: Props) => {
               <h3 dangerouslySetInnerHTML={{ __html: product.label }}></h3>
               <p>${product.price}</p>
             </div>
+            <Link href={`/products/${product.slug}`} />
           </li>
         ))}
       </ul>

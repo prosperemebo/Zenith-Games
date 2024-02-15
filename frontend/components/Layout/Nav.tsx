@@ -2,10 +2,10 @@ import Link from 'next/link';
 import classes from './Layout.module.scss';
 import Image from 'next/image';
 
-import { IoSearch } from 'react-icons/io5';
-
 import logo from '../../assets/images/logo.png';
+
 import { ICategory } from '@/utils/interfaces';
+import SearchForm from './SearchForm';
 
 async function fetchCategories(): Promise<ICategory[]> {
   const response = await fetch(
@@ -15,16 +15,20 @@ async function fetchCategories(): Promise<ICategory[]> {
   return response.json();
 }
 
-async function fetchProductCount(): Promise<ICategory[]> {
+async function fetchProductCount(): Promise<{ count: number }> {
   const response = await fetch(
-    `${process.env.SERVER_URL}/api/v1/categories/parent`,
+    `${process.env.SERVER_URL}/api/v1/products/count`,
     { cache: 'no-store' }
   );
+
   return response.json();
 }
 
 async function Nav() {
-  const categories = await fetchCategories();
+  const [categories, productCount] = await Promise.all([
+    fetchCategories(),
+    fetchProductCount(),
+  ]);
 
   return (
     <nav className={classes.navigation}>
@@ -34,14 +38,7 @@ async function Nav() {
             <Image src={logo} alt='Zenith tech' />
           </Link>
         </div>
-        <form className={classes.inputWrapper}>
-          <input type='text' placeholder='Search over 5000 products...' />
-          <button type='submit'>
-            <span>
-              <IoSearch />
-            </span>
-          </button>
-        </form>
+        <SearchForm productCount={productCount.count} />
         <div className={classes.actions}>
           <Link href='/' legacyBehavior>
             <a className='btn btn-primary'>

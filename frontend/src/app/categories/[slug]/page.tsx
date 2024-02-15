@@ -3,7 +3,7 @@ import Catalog from '../../../../components/Pages/Category/Catalog';
 
 async function fetchPageData(slug: string): Promise<ICategory> {
   const response = await fetch(
-    `${process.env.SERVER_URL}/api/v1/categories/${slug}/products?per_page=100`,
+    `${process.env.SERVER_URL}/api/v1/categories/${slug}/products?per_page=200`,
     { next: { revalidate: 10 } }
   );
   return response.json();

@@ -65,7 +65,7 @@ def get_category_product(category_id):
         abort(404)
 
     category_dict = category.to_dict()        
-    products = storage.all(Product).values()
+    products = storage.all(Product, per_page=per_page).values()
     products_list = []
     sub_categories_list = []
     

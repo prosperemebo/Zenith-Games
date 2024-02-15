@@ -12,4 +12,7 @@ export interface IProduct {
   label: string;
   cover_image: string;
   price: number;
+  summary: string;
+  description: string;
+  slug: string;
 }

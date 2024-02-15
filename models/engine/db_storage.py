@@ -40,21 +40,26 @@ class DBStorage:
         # if ENV == "test":
         #     Base.metadata.drop_all(self.__engine)
 
-    def all(self, cls=None, **kwargs):
+    def all(self, cls=None, page=1, per_page=100, **kwargs):
         """query on the current database session"""
         new_dict = {}
+        
         for clss in classes:
             if cls is None or cls is classes[clss] or cls is clss:
                 query = self.__session.query(classes[clss])
 
                 if kwargs:
                     query = query.filter_by(**kwargs)
+                    
+                # offset = (page - 1) * per_page
+                # query = query.offset(offset).limit(per_page)
 
                 objs = query.all()
 
                 for obj in objs:
                     key = obj.__class__.__name__ + "." + obj.id
                     new_dict[key] = obj
+
         return new_dict
 
     def new(self, obj):

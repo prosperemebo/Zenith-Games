@@ -111,7 +111,7 @@ def main(parent_id=0):
     is_next_page = True
     
     api_url = getenv("API_URI")
-    products_url = f"{api_url}/api/v1/products"
+    products_url = f"{api_url}/api/v1/products?page={page}&per_page=1000"
     api_products = get_data(products_url)
 
     while is_next_page == True:

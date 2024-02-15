@@ -35,7 +35,7 @@
       &:hover {
         background-color: rgba(255, 255, 255, 0.1);
       }
-      
+
       a {
         color: currentColor;
         text-decoration: none;
@@ -65,15 +65,20 @@
     align-items: center;
     border-radius: 12px;
 
-    // TODO: ENABLE SEARCH FUNCTIONALITY
-    pointer-events: none;
-
     input {
       background-color: transparent;
-      color: #b2b2b2;
       border: none;
       font-size: 1.8rem;
       flex: 1;
+      color: #ffffff;
+
+      &::placeholder {
+        color: #b2b2b2;
+      }
+
+      &:focus {
+        outline: none;
+      }
     }
 
     button {

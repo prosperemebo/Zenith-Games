@@ -1,0 +1,69 @@
+.wrapper {
+  padding: 3rem 7vw;
+
+  .header {
+    display: flex;
+    margin-bottom: 10rem;
+    height: 60vh;
+
+    .composition {
+      flex: 1;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+
+    .info {
+      flex: 1;
+      padding: 5rem;
+
+      .price {
+        font-size: 2rem;
+        font-weight: 600;
+      }
+
+      .summary {
+        color: #b2b2b2;
+        font-size: 1.6rem;
+        line-height: 170%;
+      }
+    }
+  }
+
+  .body {
+    font-size: 1.8rem;
+    line-height: 170%;
+    text-align: left;
+
+    h1 {
+	margin-bottom: 2rem;
+    }
+
+    h2, h3 {
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      margin: 2rem 0;
+
+      li {
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    img {
+      margin: 1.5rem 0;
+      width: min(70rem, 100%);
+      display: block;
+      object-position: left;
+      object-fit: contain;
+    }
+  }
+}

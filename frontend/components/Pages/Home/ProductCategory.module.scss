@@ -2,6 +2,13 @@
   padding: 0 7%;
   margin-bottom: 10rem;
 
+  .headWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
   .products {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
@@ -39,6 +46,16 @@
         p {
           font-size: 1.6rem;
         }
+      }
+
+      a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
       }
     }
   }

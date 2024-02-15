@@ -1,6 +1,7 @@
 import { IProduct } from '@/utils/interfaces';
 import classes from './Search.module.scss';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Props {
   products: IProduct[];
@@ -9,9 +10,7 @@ interface Props {
 const SearchCatalog = ({ products }: Props) => {
   return (
     <main className={classes.wrapper}>
-      <h2
-        className='heading-primary'
-      >Found {products.length} products!</h2>
+      <h2 className='heading-primary'>Found {products.length} products!</h2>
       <ul className={classes.products}>
         {products.map((product, index) => (
           <li key={product.id}>
@@ -27,6 +26,7 @@ const SearchCatalog = ({ products }: Props) => {
               <h3 dangerouslySetInnerHTML={{ __html: product.label }}></h3>
               <p>${product.price}</p>
             </div>
+            <Link href={`/products/${product.slug}`} />
           </li>
         ))}
       </ul>
