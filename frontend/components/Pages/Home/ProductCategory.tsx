@@ -37,7 +37,7 @@ const ProductCategory = ({ category }: Props) => {
     };
 
     fetchProducts();
-  }, []);
+  }, [category.id]);
 
   if (isLoading) {
     return <div>Loading...</div>;

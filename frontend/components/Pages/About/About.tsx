@@ -54,8 +54,8 @@ function About() {
           <p className='paragraph'>
             Join us for regular gaming tournaments, workshops, and events where
             you can connect with fellow gamers, learn new skills, and immerse
-            yourself in the ever-evolving world of technology. Whether you're a
-            seasoned pro or just starting your gaming journey, there's a place
+            yourself in the ever-evolving world of technology. Whether you&apos;re a
+            seasoned pro or just starting your gaming journey, there&apos;s a place
             for you here at Zenith Tech.
           </p>
         </div>
@@ -67,7 +67,7 @@ function About() {
             <p className={classes.paragraph}>
               Explore a diverse range of categories effortlessly with our
               intuitive top navigation, designed to streamline your browsing
-              experience and help you discover exactly what you're looking for.
+              experience and help you discover exactly what you&apos;re looking for.
             </p>
           </figcaption>
         </figure>
@@ -78,7 +78,7 @@ function About() {
           <figcaption>
             <p className={classes.paragraph}>
               Harness the power of our versatile search bar to explore a wide
-              array of products tailored to your needs. Whether you're hunting
+              array of products tailored to your needs. Whether you&apos;re hunting
               for the gaming consoles, gift cards, or must-have tech
               accessories, our search feature puts the entire inventory at your
               fingertips.
