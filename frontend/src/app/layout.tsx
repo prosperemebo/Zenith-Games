@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   title: 'Zenith Tech',
   description:
     'Hottest hub for tech enthausists. Get your games and gadgets at the best prices!',
+  icons: {
+    icon: ['/favicon.png?v=4'],
+    apple: ['/favicon.png?v=4'],
+    shortcut: ['/favicon.png'],
+  },
 };
 
 export default function RootLayout({
@@ -17,12 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <head>
-        <link rel="shortcut icon" href='/favicon.jpg' />
-      </head>
-      <body className={inter.className}>
-        {children}
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
