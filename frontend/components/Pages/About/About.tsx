@@ -45,7 +45,7 @@ function About() {
             consoles, peripherals, and accessories, meticulously chosen to cater
             to every type of gamer. From high-performance rigs that can handle
             the most demanding titles to sleek and stylish accessories that add
-            flair to your setup, we've got it all.
+            flair to your setup, we&apos;ve got it all.
           </p>
         </div>
         <div className={classes.aboutCard}>
