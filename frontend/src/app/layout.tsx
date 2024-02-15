@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '../sass/main.scss';
-import Nav from '../../components/Layout/Nav';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,12 +18,10 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <head>
+        <link rel="shortcut icon" href='/favicon.jpg' />
       </head>
       <body className={inter.className}>
-        <div className='body-wrapper'>
-          <Nav />
-          {children}
-        </div>
+        {children}
       </body>
     </html>
   );

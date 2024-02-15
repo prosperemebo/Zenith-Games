@@ -1,5 +1,5 @@
 import { ICategory } from '@/utils/interfaces';
-import Catalog from '../../../../components/Pages/Category/Catalog';
+import Catalog from '../../../../../components/Pages/Category/Catalog';
 
 async function fetchPageData(slug: string): Promise<ICategory> {
   const response = await fetch(

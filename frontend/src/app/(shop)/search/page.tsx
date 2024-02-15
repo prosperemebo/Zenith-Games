@@ -1,6 +1,6 @@
 import { IProduct } from '@/utils/interfaces';
 import React from 'react';
-import SearchCatalog from '../../../components/Pages/Search/SearchCatalog';
+import SearchCatalog from '../../../../components/Pages/Search/SearchCatalog';
 
 async function fetchPageData(query: string): Promise<IProduct[]> {
   const response = await fetch(

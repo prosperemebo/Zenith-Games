@@ -1,8 +1,7 @@
-import React from 'react';
-import RootLayout from '../layout';
+import About from '../../../components/Pages/About/About';
 
 function AboutPage() {
-  return <div>AboutPage</div>;
+  return <About />;
 }
 
 export default AboutPage;

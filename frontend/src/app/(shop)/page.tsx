@@ -1,6 +1,6 @@
 import { ICategory } from '@/utils/interfaces';
-import ProductSlider from '../../components/Pages/Home/ProductSlider';
-import ProductCategory from '../../components/Pages/Home/ProductCategory';
+import ProductSlider from '../../../components/Pages/Home/ProductSlider';
+import ProductCategory from '../../../components/Pages/Home/ProductCategory';
 
 async function fetchCategories(): Promise<ICategory[]> {
   const response = await fetch(
