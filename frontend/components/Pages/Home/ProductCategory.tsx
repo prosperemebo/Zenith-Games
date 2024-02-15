@@ -1,9 +1,9 @@
-'use client';
-import { ICategory, IProduct } from '@/utils/interfaces';
-import classes from './ProductCategory.module.scss';
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+"use client";
+import { ICategory, IProduct } from "@/utils/interfaces";
+import classes from "./ProductCategory.module.scss";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface Props {
   category: ICategory;
@@ -19,18 +19,18 @@ const ProductCategory = ({ category }: Props) => {
       try {
         const response = await fetch(
           `${process.env.SERVER_URL}/api/v1/categories/${category.id}/products?per_page=10`,
-          { cache: 'no-store' }
+          { cache: "no-store" },
         );
 
         if (!response.ok) {
-          throw new Error('Failed to fetch products');
+          throw new Error("Failed to fetch products");
         }
 
         const data = await response.json();
 
         setProducts(data.products);
         setIsLoading(false);
-      } catch (error) {
+      } catch (error: any) {
         setError(error.message);
         setIsLoading(false);
       }
@@ -51,23 +51,23 @@ const ProductCategory = ({ category }: Props) => {
     <div className={classes.wrapper}>
       <div className={classes.headWrapper}>
         <h2
-          className='heading-primary'
+          className="heading-primary"
           dangerouslySetInnerHTML={{ __html: category.label }}
         ></h2>
-	<Link href={`/categories/${category.slug}`} legacyBehavior>
-            <a className='btn btn-primary'>
-              <span>View All</span>
-            </a>
-          </Link>
+        <Link href={`/categories/${category.slug}`} legacyBehavior>
+          <a className="btn btn-primary">
+            <span>View All</span>
+          </a>
+        </Link>
       </div>
       <ul className={classes.products}>
         {products.map((product, index) => (
           <li key={product.id}>
             <Image
-              width='500'
-              height='500'
-              draggable='false'
-              src={product.cover_image?.split('?')[0]}
+              width="500"
+              height="500"
+              draggable="false"
+              src={product.cover_image?.split("?")[0]}
               alt={product.label}
               priority={index < 5}
             />
@@ -75,7 +75,7 @@ const ProductCategory = ({ category }: Props) => {
               <h3 dangerouslySetInnerHTML={{ __html: product.label }}></h3>
               <p>${product.price}</p>
             </div>
-	    <Link href={`/products/${product.slug}`} />
+            <Link href={`/products/${product.slug}`} />
           </li>
         ))}
       </ul>
