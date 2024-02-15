@@ -3,6 +3,7 @@
 Contains the class DBStorage
 """
 
+from sqlalchemy import or_, func
 import models
 from models.base_model import BaseModel, Base
 from models.category import Category
@@ -139,3 +140,35 @@ class DBStorage:
             count = len(models.storage.all(cls).values())
 
         return count
+
+    def search(self, cls, query_columns, query_value, **kwargs):
+        """Search objects in storage"""
+        new_dict = {}
+
+        for clss in classes:
+            if cls is None or cls is classes[clss] or cls is clss:
+                query = self.__session.query(classes[clss])
+
+                if query_columns:
+                    column_filters = [
+                        getattr(classes[clss], column).ilike(f"%{query_value}%")
+                        for column in query_columns
+                    ]
+                    query = query.filter(or_(*column_filters))
+
+                if kwargs:
+                    query = query.filter_by(**kwargs)
+                    
+                relevance_score = sum([
+                    func.lower(getattr(classes[clss], column)) == query_value.lower() 
+                    for column in query_columns
+                ])
+                query = query.order_by(relevance_score.desc())
+
+                objs = query.all()
+
+                for obj in objs:
+                    key = obj.__class__.__name__ + "." + obj.id
+                    new_dict[key] = obj
+
+        return new_dict

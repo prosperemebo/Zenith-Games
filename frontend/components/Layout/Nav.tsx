@@ -15,6 +15,14 @@ async function fetchCategories(): Promise<ICategory[]> {
   return response.json();
 }
 
+async function fetchProductCount(): Promise<ICategory[]> {
+  const response = await fetch(
+    `${process.env.SERVER_URL}/api/v1/categories/parent`,
+    { cache: 'no-store' }
+  );
+  return response.json();
+}
+
 async function Nav() {
   const categories = await fetchCategories();
 

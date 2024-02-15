@@ -110,3 +110,16 @@ def get_random_products():
         random_products = [product.to_dict() for product in random_products]
 
     return jsonify(random_products)
+
+@app_views.route('/products/search', methods=['GET'], strict_slashes=False)
+def search_products():
+    """ Search products """
+    query = request.args.get('query')
+    
+    products = storage.search(Product, ["label", "summary"], query).values()
+    products_list = []
+
+    for product in products:
+        products_list.append(product.to_dict())
+
+    return jsonify(products_list)
