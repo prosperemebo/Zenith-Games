@@ -16,6 +16,14 @@ app.register_blueprint(app_views)
 
 allowed_origins = [
     "http://localhost:3000",
+    "http://prosperhack.tech",
+    "https://prosperhack.tech",
+    "http://www.prosperhack.tech",
+    "https://www.prosperhack.tech",
+    "http://api.prosperhack.tech",
+    "http://www.api.prosperhack.tech",
+    "https://api.prosperhack.tech",
+    "https://www.api.prosperhack.tech",
 ]
 
 cors = CORS(app, resources={r"/*": {"origins": allowed_origins}})
