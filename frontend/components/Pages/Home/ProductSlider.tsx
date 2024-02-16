@@ -16,7 +16,6 @@ const ProductSlider = (): JSX.Element => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        console.log(`${process.env.SERVER_URL}/api/v1/products/recommended`);
         const response = await fetch(
           `${process.env.SERVER_URL}/api/v1/products/recommended`,
         );
