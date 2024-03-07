@@ -110,11 +110,13 @@ def main(parent_id=0):
     per_page = 100
     is_next_page = True
     
+    # GET PRODUCTS FROM API
     api_url = getenv("API_URI")
     products_url = f"{api_url}/api/v1/products?page={page}&per_page=1000"
     api_products = get_data(products_url)
 
     while is_next_page == True:
+        # GET PRODUCTS FROM CHEAP GAMES NG
         url = f"https://www.cheapgamesng.com/wp-json/wp/v2/product?page={page}&per_page={per_page}&parent={parent_id}"
         products = get_data(url)
 
@@ -127,6 +129,7 @@ def main(parent_id=0):
         else:
             page += 1
             
+        # FILTER PRODUCTS IN DATABASE
         api_products_source_ids = [product.get("source_id") for product in api_products]
         filtered_products = []
         
